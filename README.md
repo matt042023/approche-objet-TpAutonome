@@ -1,6 +1,12 @@
-# 🎮 JEU DE COMBAT RPG
+# 📚 APPLICATIONS JAVA POO - TP AUTONOME
 
-## 📋 Description
+## 📋 Description générale
+
+Collection d'applications Java développées en programmation orientée objet dans le cadre d'exercices pédagogiques. Le projet comprend plusieurs modules indépendants : jeu RPG, analyse de recensement, gestion de théâtre, utilitaires divers.
+
+---
+
+# 🎮 1. JEU DE COMBAT RPG
 
 Application Java de jeu de combat RPG développée en programmation orientée objet. Le joueur incarne un personnage qui peut combattre différentes créatures pour obtenir le meilleur score possible.
 
@@ -56,14 +62,29 @@ Après chaque victoire, vous avez **50% de chance** d'obtenir une récompense :
 - Java 21 ou supérieur
 - Terminal/Console
 
-### Compilation
+### Lancement avec Maven
 ```bash
-javac -cp "src/main/java" src/main/java/fr/diginamic/combat/*.java
+# Compilation du projet
+mvn compile
+
+# Lancement du jeu RPG
+mvn exec:java -Dexec.mainClass="fr.diginamic.combat.Jeu"
+
+# Lancement de l'application de recensement
+mvn exec:java -Dexec.mainClass="fr.diginamic.recensement.ApplicationRecensement"
 ```
 
-### Lancement
+### Lancement manuel
 ```bash
+# Compilation
+javac -cp "src/main/java" src/main/java/fr/diginamic/combat/*.java
+javac -cp "src/main/java" src/main/java/fr/diginamic/recensement/*.java
+
+# Lancement du jeu RPG
 java -cp "src/main/java" fr.diginamic.combat.Jeu
+
+# Lancement de l'application de recensement
+java -cp "src/main/java" fr.diginamic.recensement.ApplicationRecensement
 ```
 
 ## 🎮 Guide d'utilisation
@@ -123,10 +144,114 @@ Potion (interface)
 - Messages d'erreur explicites en français
 - Gestion des cas limites (inventaire vide, etc.)
 
+---
+
+# 📊 2. APPLICATION DE RECENSEMENT
+
+Application d'analyse de données démographiques françaises basée sur un fichier CSV de recensement.
+
+## 🎯 Fonctionnalités
+
+### Menu principal
+1. **🏙️ Population d'une ville donnée** - Recherche par nom de ville
+2. **🏛️ Population d'un département donné** - Recherche par code/nom de département  
+3. **🗺️ Population d'une région donnée** - Recherche par nom de région
+4. **🏆 Top 10 des régions** - Classement par population
+5. **🏆 Top 10 des départements** - Classement par population
+6. **🏆 Top 10 villes d'un département** - Villes les plus peuplées par département
+7. **🏆 Top 10 villes d'une région** - Villes les plus peuplées par région
+8. **🏆 Top 10 villes de France** - Villes les plus peuplées du pays
+
+## 🏗️ Architecture
+
+### Classes principales
+- **`ApplicationRecensement`** : Point d'entrée et menu principal
+- **`Recensement`** : Gestionnaire des données de recensement
+- **`Ville`**, **`Departement`**, **`Region`** : Entités géographiques
+- **`MenuService`** : Interface pour les services de recherche
+
+### Services de recherche
+```
+MenuService (interface)
+├── RecherchePopulationVille
+├── RecherchePopulationDepartement  
+├── RecherchePopulationRegion
+├── Top10RegionsPop
+├── Top10DepartementsPop
+├── Top10VillesDepartement
+├── Top10VillesRegion
+└── Top10VillesFrance
+```
+
+## 📁 Source de données
+- **Fichier** : `src/main/resources/recensement.csv`
+- **Format** : CSV avec colonnes ville, département, région, population
+- **Traitement** : Lecture automatique au démarrage de l'application
+
+---
+
+# 🎭 3. GESTION DE THÉÂTRE
+
+Module de gestion d'un théâtre avec système de réservation et tarification.
+
+## 🎯 Fonctionnalités
+- **Inscription** avec gestion du nombre de clients et prix
+- **Contrôle de capacité** avec exceptions personnalisées
+- **Calcul automatique** du total des inscriptions et du chiffre d'affaires
+
+## 🏗️ Classes principales
+- **`Theatre`** : Entité principale avec nom, capacité max, inscriptions
+- **`TestTheatre`** : Classe de test avec scénarios d'utilisation
+
+---
+
+# 🏠 4. GESTION DE MAISON
+
+Système de modélisation d'une maison avec différents types de pièces et calculs de superficie.
+
+## 🏗️ Architecture
+
+### Hiérarchie des pièces
+```
+Piece (classe abstraite)
+├── Chambre
+├── Cuisine  
+├── SalleDeBain
+├── Salon
+└── WC
+```
+
+### Classe principale
+- **`Maison`** : Conteneur de pièces avec calculs de superficie totale
+
+---
+
+# 🔧 5. UTILITAIRES ET SERVICES
+
+## 🧮 Opérations mathématiques (`fr.diginamic.operations`)
+- **`Operations`** : Calculatrice avec opérations de base
+- **`CalculMoyenne`** : Calcul de moyennes sur tableaux
+
+## 📄 Gestion de fichiers (`fr.diginamic.fichier`)  
+- **`CreerFichier`** : Création et écriture de fichiers  
+- **`LectureFichier`** : Lecture de fichiers texte
+- **`Ville`** : Entité ville pour manipulation de données
+
+## 🔤 Manipulation de chaînes (`fr.diginamic.chaines`)
+- **`ManipulationChaine`** : Utilitaires pour traitement de texte
+
+## 🧪 Tests et essais (`fr.diginamic.essais`)
+- **`TestMaison`** : Tests du système de maison
+- **`TestMoyenne`** : Tests des calculs de moyenne  
+- **`TestOperations`** : Tests des opérations mathématiques
+- **`TestTheatre`** : Tests du système de théâtre
+
+---
+
 ## 📄 Licence
 
 Projet éducatif - Lheureux Matthieu Java POO
 
 ---
 
-*Bon jeu ! Essayez d'obtenir le meilleur score possible ! 🏆*
+*Bon développement ! 🚀*
